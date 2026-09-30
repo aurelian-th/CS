@@ -1,0 +1,25 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest cache
+.pytest_cache/
+
+# LaTeX sources and build artifacts
+*.tex
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+pdf_preview/
+
+# Development, scripts, data, and presentation artifacts
+**/make_screenshots.py
+**/figures/
+**/data/
+**/logo.png
+
