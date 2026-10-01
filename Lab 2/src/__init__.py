@@ -24,8 +24,6 @@ from .variants import (
 )
 from .solver import (
     SubstitutionState,
-    GuidedSolver,
-    AutomatedSolver,
     V2_GROUND_TRUTH_CIPHER_TO_PLAIN,
 )
 
@@ -47,7 +45,5 @@ __all__ = [
     "resolve_variant_number",
     "list_available_variants",
     "SubstitutionState",
-    "GuidedSolver",
-    "AutomatedSolver",
     "V2_GROUND_TRUTH_CIPHER_TO_PLAIN",
 ]

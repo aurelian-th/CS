@@ -31,8 +31,6 @@ from src.variants import (
 )
 from src.solver import (
     SubstitutionState,
-    GuidedSolver,
-    AutomatedSolver,
     V2_GROUND_TRUTH_CIPHER_TO_PLAIN,
 )
 
@@ -173,36 +171,14 @@ class TestSubstitutionState:
         assert "Wu-ching tsung-yao" in plaintext or "wu-ching tsung-yao" in plaintext.lower()
 
 
-class TestGuidedSolver:
-    """Tests for the step-by-step pedagogical walkthrough."""
-
-    def test_guided_steps_progression(self):
-        text, _, _ = get_variant(2)
-        solver = GuidedSolver(text)
-        steps = solver.generate_steps()
-
-        assert len(steps) == 6
-        assert steps[0].step_number == 1
-        assert "WQV" in steps[0].title
-        assert len(steps[0].cumulative_mappings) == 3
-
-        # Step 6 must map all 26 letters
-        assert steps[5].step_number == 6
-        assert len(steps[5].cumulative_mappings) == 26
-
-        # Step 6 decoded sample must contain 'cryptography'
-        assert "cryptography" in steps[5].preview_decryption.lower()
+    def test_swap_plain_letters(self):
+        state = SubstitutionState({"W": "t", "Q": "h"})
+        # Swap 't' and 'h'
+        ok, msg = state.swap_plain_letters("t", "h")
+        assert ok
+        assert state.cipher_to_plain["W"] == "h"
+        assert state.cipher_to_plain["Q"] == "t"
+        assert state.plain_to_cipher["h"] == "W"
+        assert state.plain_to_cipher["t"] == "Q"
 
 
-class TestAutomatedSolver:
-    """Tests for the stochastic hill-climbing solver."""
-
-    def test_automated_solver_score_improvement(self):
-        text, _, _ = get_variant(2)
-        auto = AutomatedSolver(text)
-        initial_key = auto.generate_initial_key()
-        initial_score = auto.score_key(initial_key)
-
-        best_key, best_score, _ = auto.solve(max_iterations=1200, restarts=2, seed=123)
-        assert best_score > initial_score
-        assert len(best_key) == 26

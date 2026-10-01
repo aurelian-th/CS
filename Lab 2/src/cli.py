@@ -35,7 +35,6 @@ if __package__ is None or __package__ == "":
     )
     from src.solver import (
         SubstitutionState,
-        AutomatedSolver,
         V2_GROUND_TRUTH_CIPHER_TO_PLAIN,
     )
 else:
@@ -65,7 +64,6 @@ else:
     )
     from .solver import (
         SubstitutionState,
-        AutomatedSolver,
         V2_GROUND_TRUTH_CIPHER_TO_PLAIN,
     )
 
@@ -134,7 +132,6 @@ def run_interactive_sandbox(ciphertext: str, state: SubstitutionState) -> None:
     print("  m <C> <P>     : Map cipher letter C to plain letter P (e.g. 'm w t')")
     print("  u <C>         : Unmap cipher letter C (e.g. 'u w')")
     print("  swap <P1> <P2>: Swap two plaintext letters (e.g. 'swap b y' to fix 'secrecb')")
-    print("  auto          : Run automated hill-climbing solver")
     print("  key           : Display current substitution table")
     print("  text          : Display decoded text with current mapping")
     print("  solve         : Load verified ground truth key")
@@ -176,16 +173,6 @@ def run_interactive_sandbox(ciphertext: str, state: SubstitutionState) -> None:
             c = parts[1].upper()
             state.unmap_letter(c)
             print(f"Unmapped {c}\n")
-        elif cmd == "auto":
-            print("Running automated solver...")
-            auto = AutomatedSolver(ciphertext)
-            best_key, score, _ = auto.solve(restarts=4, max_iterations=2500)
-            state.load_mapping(best_key)
-            print(f"Loaded automated solution (fitness score: {score:.2f}).")
-            print_key_table(state)
-            print("Decoded plaintext:\n")
-            print(state.decode_clean_plaintext(ciphertext))
-            print()
         elif cmd == "key":
             print_key_table(state)
         elif cmd == "text":
@@ -203,7 +190,7 @@ def run_interactive_sandbox(ciphertext: str, state: SubstitutionState) -> None:
             state.reset()
             print("Reset all mappings.\n")
         else:
-            print("Unknown command. Type 'm <C> <P>', 'swap <P1> <P2>', 'auto', 'key', 'text', 'solve', 'reset', or 'b'.")
+            print("Unknown command. Type 'm <C> <P>', 'swap <P1> <P2>', 'key', 'text', 'solve', 'reset', or 'b'.")
 
 
 def run_menu(initial_variant: int = 25) -> None:
@@ -223,7 +210,6 @@ def run_menu(initial_variant: int = 25) -> None:
         print("2. Letter frequency analysis")
         print("3. N-gram analysis (bigrams and trigrams)")
         print("4. Interactive substitution sandbox")
-        print("5. Run automated solver (hill-climbing)")
         print("0. Exit")
 
         try:
@@ -242,20 +228,10 @@ def run_menu(initial_variant: int = 25) -> None:
             print_ngrams_table(ciphertext)
         elif choice == "4":
             run_interactive_sandbox(ciphertext, state)
-        elif choice == "5":
-            print("\nRunning automated hill-climbing solver...")
-            auto = AutomatedSolver(ciphertext)
-            best_key, score, _ = auto.solve(restarts=4, max_iterations=2500)
-            state.load_mapping(best_key)
-            print(f"Optimal score reached: {score:.2f}")
-            print_key_table(state)
-            print("Decoded plaintext:\n")
-            print(state.decode_clean_plaintext(ciphertext))
-            print()
         elif choice in ("0", "q", "exit"):
             break
         else:
-            print("Invalid option. Please enter a number between 0 and 5.\n")
+            print("Invalid option. Please enter a number between 0 and 4.\n")
 
 
 def main() -> None:
@@ -336,9 +312,9 @@ def main() -> None:
         if resolved_id == 2:
             state.load_mapping(V2_GROUND_TRUTH_CIPHER_TO_PLAIN)
         else:
-            auto = AutomatedSolver(ciphertext)
-            best_key, _, _ = auto.solve(restarts=5, max_iterations=3000)
-            state.load_mapping(best_key)
+            print(f"Notice: Verified solution key is preconfigured for Variant 2 (student catalog #25).")
+            print("Use interactive mode (--interactive) to analyze and solve this text.")
+            return
 
         if args.clean:
             print(state.decode_clean_plaintext(ciphertext))

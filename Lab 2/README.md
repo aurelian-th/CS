@@ -32,10 +32,7 @@ The implementation is evaluated on the assigned student variant (**Variant 25**,
    - Domain-specific terminology: `hifuwnjituqf` as `cryptography`, `pvhivhf` as `secrecy`, `uinodhvo` as `produced`.
    - Comprehensive reconstruction of the 26-letter substitution alphabet.
 
-4. **Stochastic automated solver:**
-   - Hill-climbing algorithm with random restarts driven by English bigram log-probability scoring.
-
-5. **Publication-grade visualization engine:**
+4. **Publication-grade visualization engine:**
    - Side-by-side frequency comparison bars, ranked decay curves, IC verification, and top bigram distributions.
 
 ### Directory structure
@@ -45,15 +42,15 @@ CS/Lab 2/
 ├── src/
 │   ├── __init__.py
 │   ├── __main__.py
-│   ├── corpus.py          # English frequencies (Table 2.2), n-grams, scoring tables
+│   ├── corpus.py          # English frequencies (Table 2.2), n-grams, IC benchmarks
 │   ├── analyzer.py        # Frequency analysis, IC, Chi-square, n-grams
 │   ├── variants.py        # 23 assignment variants & modulo resolution
-│   ├── solver.py          # SubstitutionState, GuidedSolver, AutomatedSolver
+│   ├── solver.py          # SubstitutionState and Variant 2 key mapping
 │   ├── plots.py           # Publication-grade matplotlib charts
 │   └── cli.py             # Minimalist interactive application & CLI
 ├── tests/
 │   ├── __init__.py
-│   └── test_crypto.py     # 19 comprehensive unit tests
+│   └── test_crypto.py     # 18 comprehensive unit tests
 ├── figures/               # Generated 300 DPI analytical charts
 │   ├── fig1_freq_comparison_v2.png
 │   ├── fig2_freq_sorted_v2.png
