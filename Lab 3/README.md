@@ -45,9 +45,6 @@ CS/Lab 3/
 │   ├── alphabet.py        # Romanian alphabet and character validation
 │   ├── playfair.py        # PlayfairCipher engine (6x5 matrix, digraph rules, steps)
 │   └── cli.py             # Dual-mode Unix CLI & interactive console interface
-├── tests/
-│   ├── __init__.py
-│   └── test_ciphers.py    # Unit test suite covering alphabet, matrix, and cipher rules
 ├── CS_Lab3_Report.pdf     # Compiled academic laboratory report
 ├── Lucrare de laborator nr. 3. Cifruri polialfabetice.pdf
 ├── answers.md             # Oral defense questions & answers guide
