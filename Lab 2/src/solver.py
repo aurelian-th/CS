@@ -6,7 +6,7 @@ from .corpus import ENGLISH_ALPHABET
 
 # Verified ground truth mapping for Variant 2 (David Kahn: The Codebreakers)
 # Ciphertext character (uppercase) -> Plaintext character (lowercase)
-V2_GROUND_TRUTH_CIPHER_TO_PLAIN: Dict[str, str] = {
+ORIGINAL_DECODE: Dict[str, str] = {
     "A": "b",
     "B": "q",
     "C": "f",

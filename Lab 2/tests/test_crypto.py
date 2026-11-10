@@ -31,7 +31,7 @@ from src.variants import (
 )
 from src.solver import (
     SubstitutionState,
-    V2_GROUND_TRUTH_CIPHER_TO_PLAIN,
+    ORIGINAL_DECODE,
 )
 
 
@@ -149,7 +149,7 @@ class TestSubstitutionState:
         assert decoded.startswith("the TOOXtXNG NC PeHIeHF")
 
     def test_punctuation_and_whitespace_preservation(self):
-        state = SubstitutionState(V2_GROUND_TRUTH_CIPHER_TO_PLAIN)
+        state = SubstitutionState(ORIGINAL_DECODE)
         cipher = "Wqv tooxwxng, 1920—tgo 'Vjfuw'p'!"
         decoded = state.decode_text(cipher)
         assert "," in decoded
@@ -159,7 +159,7 @@ class TestSubstitutionState:
 
     def test_v2_ground_truth_decryption(self):
         text, _, _ = get_variant(2)
-        state = SubstitutionState(V2_GROUND_TRUTH_CIPHER_TO_PLAIN)
+        state = SubstitutionState(ORIGINAL_DECODE)
         assert state.is_complete()
         assert state.completion_percentage() == 100.0
 

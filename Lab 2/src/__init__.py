@@ -24,7 +24,7 @@ from .variants import (
 )
 from .solver import (
     SubstitutionState,
-    V2_GROUND_TRUTH_CIPHER_TO_PLAIN,
+    ORIGINAL_DECODE,
 )
 
 __all__ = [
@@ -45,5 +45,5 @@ __all__ = [
     "resolve_variant_number",
     "list_available_variants",
     "SubstitutionState",
-    "V2_GROUND_TRUTH_CIPHER_TO_PLAIN",
+    "ORIGINAL_DECODE",
 ]

@@ -35,7 +35,7 @@ if __package__ is None or __package__ == "":
     )
     from src.solver import (
         SubstitutionState,
-        V2_GROUND_TRUTH_CIPHER_TO_PLAIN,
+        ORIGINAL_DECODE,
     )
 else:
     from .corpus import (
@@ -64,7 +64,7 @@ else:
     )
     from .solver import (
         SubstitutionState,
-        V2_GROUND_TRUTH_CIPHER_TO_PLAIN,
+        ORIGINAL_DECODE,
     )
 
 
@@ -180,7 +180,7 @@ def run_interactive_sandbox(ciphertext: str, state: SubstitutionState) -> None:
             print(state.decode_text(ciphertext))
             print()
         elif cmd == "solve":
-            state.load_mapping(V2_GROUND_TRUTH_CIPHER_TO_PLAIN)
+            state.load_mapping(ORIGINAL_DECODE)
             print("Loaded ground truth key.")
             print_key_table(state)
             print("Decoded plaintext:\n")
@@ -310,7 +310,7 @@ def main() -> None:
     if args.solve:
         state = SubstitutionState()
         if resolved_id == 2:
-            state.load_mapping(V2_GROUND_TRUTH_CIPHER_TO_PLAIN)
+            state.load_mapping(ORIGINAL_DECODE)
         else:
             print(f"Notice: Verified solution key is preconfigured for Variant 2 (student catalog #25).")
             print("Use interactive mode (--interactive) to analyze and solve this text.")
